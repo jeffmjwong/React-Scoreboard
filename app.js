@@ -12,13 +12,18 @@ const Header = (props) => (
   </header>
 );
 
-const Player = (props) => (
-  <div className="player">
-    <span className="player-name">{ props.name }</span>
+class Player extends React.Component {
+  render() {
+    const { name, score } = this.props;
+    return (
+      <div className="player">
+        <span className="player-name">{ name }</span>
 
-    <Counter score={props.score} />
-  </div>
-);
+        <Counter score={score} />
+      </div>
+    );
+  }
+};
 
 class Counter extends React.Component {
   render() {
@@ -34,22 +39,25 @@ class Counter extends React.Component {
   }
 };
 
-const App = (props) => {
-  return (
-    <div className="scoreboard">
-      <Header title="Scoreboard" totalPlayers={props.initialPlayers.length} />
+class App extends React.Component {
+  render() {
+    const { initialPlayers } = this.props;
+    return (
+      <div className="scoreboard">
+        <Header title="Scoreboard" totalPlayers={initialPlayers.length} />
 
-      {
-        props.initialPlayers.map(player =>
-          <Player
-            key={player.id.toString()}
-            name={player.name}
-            score={player.score}
-          />
-        )
-      }
-    </div>
-  );
+        {
+          initialPlayers.map(player =>
+            <Player
+              key={player.id.toString()}
+              name={player.name}
+              score={player.score}
+            />
+          )
+        }
+      </div>
+    );
+  }
 };
 
 ReactDOM.render(
