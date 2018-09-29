@@ -26,8 +26,12 @@ class Player extends React.Component {
 };
 
 class Counter extends React.Component {
+  state = {
+    score: 0,
+  };
+
   render() {
-    const { score } = this.props;
+    const { score } = this.state;
 
     return (
       <div className="counter">
@@ -51,7 +55,6 @@ class App extends React.Component {
             <Player
               key={player.id.toString()}
               name={player.name}
-              score={player.score}
             />
           )
         }
